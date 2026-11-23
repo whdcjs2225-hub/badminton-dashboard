@@ -1,0 +1,8 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.dirname(path.dirname(fileURLToPath(import.meta.url))),site=path.join(root,'site');
+const allowed=new Set(['index.html','state.json','status.json','run.json','.nojekyll']);
+const checks=[['email',/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i],['phone',/(?<!\d)0\d{1,2}[-. ]?\d{3,4}[-. ]?\d{4}(?!\d)/],['account-like-number',/(?<!\d)\d{3,6}[- ]\d{2,6}[- ]\d{3,8}(?!\d)/],['windows-user-path',/[A-Z]:\\(?:Users|Documents and Settings)\\/i],['mac-user-path',/\/Users\/[^\s<>"']+/],['github-personal-token',/\b(?:gh[pousr]_[A-Za-z0-9]{25,}|github_pat_[A-Za-z0-9_]{30,})\b/],['private-key',/-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----/],['secret-assignment',/(?:api[_-]?key|access[_-]?token|password)\s*[=:]\s*["'][A-Za-z0-9_+\/-]{16,}["']/i],['private-market-data',/ckb-yeoju|닌자다|닌자당|pwmAccountId|parentSessionId|sourceZipSha256|workingFolder/]];
+const findings=[];for(const file of await fs.readdir(site)){if(!allowed.has(file)){findings.push({file,kind:'unexpected-public-file'});continue}const text=await fs.readFile(path.join(site,file),'utf8');for(const [kind,re]of checks)if(re.test(text))findings.push({file,kind})}
+const report={checkedAt:new Date().toISOString(),scope:'Pages site/ only',files:[...allowed],pass:findings.length===0,findings};await fs.mkdir(path.join(root,'reports'),{recursive:true});await fs.writeFile(path.join(root,'reports/privacy-scan.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));if(findings.length)process.exitCode=1;

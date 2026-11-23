@@ -1,0 +1,95 @@
+name: Update existing dashboard and deploy Pages
+on:
+  workflow_dispatch:
+# Enable only AFTER an approved manual deployment and public-link validation:
+#  schedule:
+#    - cron: '0 0 * * 1' # Monday 09:00 Asia/Seoul (GitHub may start late)
+permissions:
+  contents: read
+concurrency:
+  group: badminton-pages
+  cancel-in-progress: false
+jobs:
+  update:
+    if: vars.PAGES_PUBLISH_APPROVED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - name: Collect, preserve failures, and write current source status
+        run: npm run collect
+      - run: npm run build
+      - run: npm run scan
+      - run: npm run test:browser
+      - name: Persist last successful source data and failure timestamps
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/tournaments.json site/index.html site/state.json site/status.json site/run.json site/.nojekyll
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update public tournament data and source health'
+            git push
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Keep collection evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: update-evidence-${{ github.run_id }}
+          path: reports/
+          retention-days: 30
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy only the reviewed site directory
+        id: deployment
+        uses: actions/deploy-pages@v4
+  verify-public:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - name: Same HTTPS link, no saved login, iPhone width, this exact run
+        env:
+          PUBLIC_URL: ${{ needs.deploy.outputs.page_url }}
+          EXPECTED_RUN: ${{ github.run_id }}
+        run: node scripts/browser-check.mjs --url "$PUBLIC_URL" --expected-run "$EXPECTED_RUN"
+      - name: Save publication verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-verification-${{ github.run_id }}
+          path: |
+            reports/public-check.json
+            reports/desktop.png
+            reports/iphone.png
+          retention-days: 30
+# PAGES_PUBLISH_APPROVED must not be set before user approval.
+# Do not stop the Mac Aside routine before the first scheduled cloud run is verified.

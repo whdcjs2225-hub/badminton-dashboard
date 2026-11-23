@@ -1,0 +1,45 @@
+name: Cloud source check (no publication)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: badminton-source-check
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - name: Regression tests (retention, scope, privacy, deduplication)
+        run: npm test
+      - name: Probe six sources from GitHub cloud, not this desktop
+        run: npm run collect -- --probe
+      - name: Render preview with original HTML and filters
+        run: npm run build -- --state reports/probe-state.json
+      - name: Inspect publishable files for private information
+        run: npm run scan
+      - name: Browser and iPhone-size verification
+        run: npm run test:browser
+      - name: Save actual cloud results and private preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-check-${{ github.run_id }}
+          path: |
+            reports/cloud-check.json
+            reports/cloud-check.md
+            reports/privacy-scan.json
+            reports/browser-check.json
+            reports/desktop.png
+            reports/iphone.png
+            site/
+          retention-days: 14
+# No push/schedule trigger and no Pages permission. This workflow cannot publish.

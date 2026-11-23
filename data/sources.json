@@ -1,0 +1,44 @@
+[
+  {
+    "id": "wekkuk",
+    "name": "위꾹",
+    "url": "https://wekkuklive.com/",
+    "kind": "app",
+    "coverage": "공식 공개 웹에서 전체 대회 목록 미확인"
+  },
+  {
+    "id": "facecock",
+    "name": "페이스콕",
+    "url": "https://facecock.co.kr/page/?pid=game",
+    "kind": "facecock",
+    "coverage": "공개 대회 목록 페이지"
+  },
+  {
+    "id": "bkplay",
+    "name": "BKPLAY",
+    "url": "https://sfa.bkplay.kr/tournament/all/year/list.do",
+    "kind": "bkplay",
+    "coverage": "현재 연도 공개 전체 목록"
+  },
+  {
+    "id": "sponet",
+    "name": "스포넷",
+    "url": "https://sponet.co.kr/",
+    "kind": "sponet",
+    "coverage": "전체 목록 미확인 · 개별 대회 접근과 구분"
+  },
+  {
+    "id": "badmintongame",
+    "name": "전국배드민턴대회",
+    "url": "http://www.badmintongame.co.kr/game/game_list.html",
+    "kind": "badmintongame",
+    "coverage": "전국·충주·충북·충남 필터와 페이지 순회"
+  },
+  {
+    "id": "ohmy",
+    "name": "오마이민턴",
+    "url": "http://www.game-chart.kr/main/",
+    "kind": "ohmy",
+    "coverage": "예정 대회 목록"
+  }
+]
