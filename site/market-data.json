@@ -1,15 +1,15 @@
 {
-  "attemptedAt": "2026-11-23T13:41:14.127Z",
+  "attemptedAt": "2026-11-23T15:19:58.101Z",
   "lastSuccessfulRefreshAt": "2026-11-23T13:41:14.127Z",
-  "refreshMode": "수동 공개 원문 확인. 전체 시장의 실시간·최신 전체 목록은 아닙니다.",
+  "refreshMode": "GitHub 주간 익명 공개 검색·재확인. 확인한 일부 공개 매물이며 전체 시장 실시간 자료가 아닙니다.",
   "sources": [
     {
       "id": "joongna",
       "name": "중고나라 공개 페이지",
-      "status": "partial",
-      "lastAttemptAt": "2026-11-23T13:41:14.127Z",
+      "status": "failed",
+      "lastAttemptAt": "2026-11-23T15:19:58.101Z",
       "lastSuccessAt": "2026-11-23T13:41:14.127Z",
-      "message": "머신·라켓 최신순과 판매완료 제외 적용 확인. 공개 상세 선택 8건을 확인했으며 전체 시장·판매 중 여부를 보장하지 않습니다.",
+      "message": "신규검색 0/2, 상세확인 0건, 실패 9건. 미확인 항목과 이전 자료를 보존합니다.",
       "searchLinks": [
         {
           "category": "machine",
