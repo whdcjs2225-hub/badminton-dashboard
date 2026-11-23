@@ -1,9 +1,8 @@
 name: Update existing dashboard and deploy Pages
 on:
   workflow_dispatch:
-# Enable only AFTER an approved manual deployment and public-link validation:
-#  schedule:
-#    - cron: '0 0 * * 1' # Monday 09:00 Asia/Seoul (GitHub may start late)
+  schedule:
+    - cron: '0 0 * * 1' # Monday 09:00 Asia/Seoul (GitHub may start late)
 permissions:
   contents: read
 concurrency:

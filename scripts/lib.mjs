@@ -4,7 +4,7 @@ export function redact(value){return cleanText(value).replace(/\b[A-Z0-9._%+-]+@
 export function safeUrl(value){try{const u=new URL(value);if(!['http:','https:'].includes(u.protocol)||u.username||u.password)return '';for(const k of [...u.searchParams.keys()])if(/(?:token|password|secret|auth|session|api.?key|signature|credential)/i.test(k))u.searchParams.delete(k);return u.href}catch{return ''}}
 export function sanitizeRecord(t){const out={};for(const [k,v] of Object.entries(t)){if(k==='sourceLinks'){out[k]=(Array.isArray(v)?v:[]).map(x=>({site:redact(x.site),url:safeUrl(x.url)})).filter(x=>x.url)}else if(k==='url'){out[k]=safeUrl(v)}else if(Array.isArray(v)){out[k]=v.map(x=>typeof x==='string'?redact(x):x)}else if(typeof v==='string'){out[k]=redact(v)}else out[k]=v}return out}
 export function scopeDecision(t){const title=cleanText(t.title),evidence=cleanText(t.scopeEvidence||''),location=cleanText(t.location||'');if(/선수권|엘리트|소년체전|전국체전|학생선수|학교대항|실업연맹|대학연맹/.test(title))return {include:false,reason:'elite_or_school'};if(/전국/.test(title+' '+evidence)){let scope='national';if(/충주/.test(title+' '+location))scope+=' chungju chungcheong';else if(/충북|충남|충청북도|충청남도|단양|제천/.test(location))scope+=' chungcheong';return {include:true,scope,scopeLabel:scope.includes('chungju')?'전국 · 충주시 · 충청권':scope.includes('chungcheong')?'전국 · 충청권':'전국'}}if(/충주/.test(title+' '+evidence)&&!/충주가 아닌/.test(evidence))return {include:true,scope:'chungju chungcheong',scopeLabel:'충주시 · 충청권'};if(/충청북도|충청남도|충북|충남/.test(title)&&/도지사|도협회|도민|충청북도|충청남도/.test(title)&&!/시장기|군수기|구청장기|시협회|군협회/.test(title))return {include:true,scope:'chungcheong',scopeLabel:'충북·충남 도 단위'};return {include:false,reason:'outside_scope_or_unverified'}}
-export function normalizeTitle(s){return cleanText(s).normalize('NFKC').replace(/open/gi,'오픈').replace(/\(\s*준자강\s*신청\s*\)/g,'').replace(/\s|[()\[\]{}·,.\-_/]/g,'').toLowerCase()}
+export function normalizeTitle(s){return cleanText(s).normalize('NFKC').replace(/open/gi,'오픈').replace(/\(\s*준자강\s*신청\s*\)/g,'').replace(/\(\s*문의\s*[:：][^)]*\)/g,'').replace(/\s|[()\[\]{}·,.\-_/]/g,'').toLowerCase()}
 export function aliases(t){const a=new Set(t.platformAliases||[]);if(t.id)a.add(t.id);for(const s of t.sourceLinks||[]){try{const u=new URL(s.url),ga=u.searchParams.get('ga_id')||u.searchParams.get('wr_id'),bk=u.searchParams.get('tnmtId');if(ga&&/facecock|badmintongame/.test(u.hostname))a.add('game-'+ga);if(bk&&u.hostname.endsWith('bkplay.kr'))a.add('bk-'+bk)}catch{}}return a}
 export function dateIdentity(t){return t.startDate||String(t.date||'').match(/20\d{2}[.-]\d{1,2}[.-]\d{1,2}/)?.[0].replaceAll('.','-')||''}
 export function sameEvent(a,b){const aa=aliases(a),bb=aliases(b);if([...aa].some(x=>bb.has(x)))return true;const ad=dateIdentity(a),bd=dateIdentity(b);return !!ad&&ad===bd&&normalizeTitle(a.title)===normalizeTitle(b.title)}
@@ -25,8 +25,9 @@ export function mergeRecords(previous,incoming,now){
     const old=result[index];
     const next={...old};
     for(const field of ['title','date','startDate','endDate','location','registrationPeriod','deadline','deadlineISO','host']){
-      const allowed=item.detailVerified||['date','startDate','endDate'].includes(field)||!old[field];
-      if(!item[field]||!allowed||/^(?:미확인|미게시|원문 확인 필요)$/.test(item[field]))continue;
+      const allowed=item.verifiedFields?.includes(field)||['date','startDate','endDate'].includes(field)||!old[field];
+      if(!item[field]||!allowed||/^(?:미확인|미게시|원문 확인 필요)$/.test(item[field])||/0000년|0000[./-]0/.test(item[field]))continue;
+      if(['deadline','deadlineISO'].includes(field)&&item.deadlineTimeKnown===false&&old.deadlineISO&&item.deadlineISO&&old.deadlineISO.slice(0,10)===item.deadlineISO.slice(0,10))continue;
       if(old[field]&&old[field]!==item[field]){
         next.changes=[...(next.changes||[]),now.slice(0,10)+' '+field+': '+old[field]+' → '+item[field]].slice(-20);
         next.section='new';
