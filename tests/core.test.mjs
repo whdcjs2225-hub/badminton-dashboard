@@ -19,3 +19,6 @@ test('문의 연락처가 붙은 준자강 접수 공지도 기존 대회로 합
 test('날짜만 상세 확인돼도 지역 요약이 기존 체육관을 덮지 않음',()=>{const item={...base,id:'new',location:'[경북-상주시]',detailVerified:true,verifiedFields:[]};const m=mergeRecords([base],[item],at);assert.equal(m.tournaments[0].location,base.location)});
 test('상세 원문에 명시된 경기장 변경만 반영',()=>{const item={...base,location:'새 체육관',verifiedFields:['location'],detailVerified:true};const m=mergeRecords([base],[item],at);assert.equal(m.tournaments[0].location,'새 체육관')});
 test('접수 날짜만 재확인되면 기존에 알려진 마감 시각 유지',()=>{const old={...base,deadline:'11/29 18:00',deadlineISO:'2026-11-29T18:00:00+09:00'};const item={...base,deadline:'2026-11-29',deadlineISO:'2026-11-29T23:59:00+09:00',deadlineTimeKnown:false,verifiedFields:['deadline','deadlineISO']};const m=mergeRecords([old],[item],at);assert.equal(m.tournaments[0].deadline,old.deadline);assert.equal(m.tournaments[0].deadlineISO,old.deadlineISO)});
+
+test('개인정보 제거는 반복 실행해도 안내 문구가 중첩되지 않음',()=>{const input='문의 담당자 홍길동 · [담당자 정보는 원문 확인]';assert.equal(redact(redact(input)),redact(input));assert.equal(redact('[[[담당자 정보는 원문 확인] 원문 확인] 원문 확인]'),'[담당자 정보는 원문 확인]')});
+test('공개 대회는 개인정보 제거를 반복해도 같은 값 유지',()=>{const input={...base,method:'개인은 [[[담당자 정보는 원문 확인] 원문 확인] 원문 확인]에게 문의'};assert.deepEqual(sanitizeRecord(sanitizeRecord(input)),sanitizeRecord(input))});
