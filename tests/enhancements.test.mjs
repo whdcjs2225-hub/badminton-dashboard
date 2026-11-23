@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildGradePageData,publicMarketData} from '../scripts/enhancements.mjs';
-import {parseProductEvidence,relevantMarketTitle,retainMarketRecords} from '../scripts/market-logic.mjs';
+import {parseProductEvidence,relevantMarketTitle,retainMarketRecords,readProductDom} from '../scripts/market-logic.mjs';
 const original={id:'a',title:'전국 배드민턴',grade:'2025년까지만 인정',conditions:'F급 지역 제한',detailLastChecked:'2026-11-16'};
 const rules={rules:[{id:'a',sourceGrade:original.grade,sourceConditions:original.conditions,family:'대회 입상',period:'2025년까지',missing:[],restrictions:[],evidenceLevel:'보존된 요강'}]};
 test('급수 원문과 요강 확인일을 보존하고 목록 시각과 분리',()=>{const r=buildGradePageData([original],rules,'2026-11-23');assert.equal(r.events[0].grade,original.grade);assert.equal(r.events[0].detailLastChecked,'2026-11-16');assert.equal(r.events[0].summary.summaryStale,false)});
@@ -21,3 +21,6 @@ test('이전 판매완료를 미확인 재조회로 판매중처럼 되살리지
 test('판매자 본문은 그대로 저장하지 않고 상태 신호만 요약',()=>{const p=parseProductEvidence({...evidence,description:'미사용 장기보관품. 제 이름은 PRIVATE_PERSON 입니다. 거트는 새로 끼워야 합니다.'});assert.ok(!p.condition.includes('PRIVATE_PERSON'));assert.match(p.condition,/미사용/);assert.match(p.condition,/거트/)});
 
 test('개최일이 바뀌면 이전 연도 급수 요약을 그대로 확정하지 않음',()=>{const r={rules:[{...rules.rules[0],sourceEventDate:'2026.12.05'}]};assert.equal(buildGradePageData([{...original,date:'2027.12.05'}],r,'now').events[0].summary.summaryStale,true)});
+
+test('중고 상세 DOM 깊이가 달라도 제목 근처 실제 가격을 읽음',()=>{const price={tagName:'SECTION',textContent:'배드민턴 라켓80,000원',innerText:'배드민턴 라켓\n80,000원',parentElement:{tagName:'MAIN',innerText:'배드민턴 라켓\n80,000원\n5분 전'}};const heading={textContent:'배드민턴 라켓',parentElement:{tagName:'DIV',textContent:'배드민턴 라켓',innerText:'배드민턴 라켓',parentElement:price}};assert.match(readProductDom(heading).priceBlock,/80,000/)});
+test('접근 오류처럼 단순한 DOM도 부모 null 예외 없이 거부',()=>{const heading={textContent:'접근 제한',parentElement:{tagName:'BODY',textContent:'접근 제한',parentElement:null}};assert.equal(readProductDom(heading).priceBlock,'')});

@@ -17,7 +17,7 @@
 - 로그인 정보, 인증키, 세션, Aside 대화·루틴ID.
 - ZIP 인계 문서 전체, 정제 전 HTML, 개인 작업본 백업.
 
-`private-reference/`, `reports/`, `node_modules/`, `.env*`, 키 파일은 업로드/배포 대상이 아닙니다. Pages의 공개 대상은 `site/`의 index.html, state.json, status.json, run.json, .nojekyll뿐입니다.
+`private-reference/`, `reports/`, `node_modules/`, `.env*`, 키 파일은 업로드/배포 대상이 아닙니다. Pages의 공개 대상은 `site/`의 index.html, state.json, status.json, run.json, .nojekyll, grades.html, market.html, market-data.json뿐입니다.
 
 ## 확인이 필요한 단계
 - [x] GitHub Actions 실제 6개 출처 시험 결과 확인
@@ -44,7 +44,8 @@
 ## 추가 공개 승인
 사용자가 이 대화에서 급수 비교와 공개 중고 화면·수집 코드의 기존 공개 사이트 반영을 승인했습니다. 공개 매물의 제목·모델·가격·판매 상태·확인일·원문 링크만 추가하며 성명·연락처·계좌·개인 구매 조건은 제외합니다.
 - [x] 추가 공개 범위 승인
-- [x] 로컬34개 회귀검사·개인정보 검사·모바일·기존16건/5필터 보존
-- [ ] 중고 자료의 실제 GitHub 조회 결과 확인
-- [ ] 같은 HTTPS의 대회·급수·중고 세 화면 비로그인 검증
+- [x] 로컬36개 회귀검사·개인정보 검사·모바일·기존16건/5필터 보존
+- [x] 중고 자료의 첫 실제 GitHub 조회 결과 확인: 45203684066에서 상세0건 확인, 기존8건 보존. 수집 성공으로 보고하지 않음. 후속 접속 응답·DOM 진단 보완.
+- [x] 같은 HTTPS의 대회·급수·중고 세 화면 비로그인 검증: 45203684066, authenticated=false, 급수 비교·머신/라켓 전환·390px 가로 넘침 없음
+- [ ] 중고 출처의 전체 최신검색·상세조회 정상 성공
 Pages 허용 파일: index.html, state.json, status.json, run.json, .nojekyll, grades.html, market.html, market-data.json.
