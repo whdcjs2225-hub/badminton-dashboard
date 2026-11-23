@@ -26,6 +26,8 @@ jobs:
       - run: npm test
       - name: Collect, preserve failures, and write current source status
         run: npm run collect
+      - name: Inspect public used goods, retain prior data on failure
+        run: npm run collect:market
       - run: npm run build
       - run: npm run scan
       - run: npm run test:browser
@@ -33,7 +35,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/tournaments.json site/index.html site/state.json site/status.json site/run.json site/.nojekyll
+          git add data/tournaments.json data/market.json site/index.html site/state.json site/status.json site/run.json site/.nojekyll site/grades.html site/market.html site/market-data.json
           if ! git diff --cached --quiet; then
             git commit -m 'Update public tournament data and source health'
             git push
@@ -89,6 +91,8 @@ jobs:
             reports/public-check.json
             reports/desktop.png
             reports/iphone.png
+            reports/grades-phone.png
+            reports/market-phone.png
           retention-days: 30
 # PAGES_PUBLISH_APPROVED must not be set before user approval.
 # Do not stop the Mac Aside routine before the first scheduled cloud run is verified.

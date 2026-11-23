@@ -1,0 +1,21 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {chromium} from 'playwright';
+import {redact} from './lib.mjs';
+import {parseProductEvidence,relevantMarketTitle,retainMarketRecords} from './market-logic.mjs';
+const root=path.dirname(path.dirname(fileURLToPath(import.meta.url))),file=path.join(root,'data/market.json'),now=new Date().toISOString();
+if(!process.env.GITHUB_ACTIONS&&!process.argv.includes('--local'))throw Error('Local market inspection requires explicit --local; do not report it as cloud collection');
+const old=JSON.parse(await fs.readFile(file,'utf8')),source=old.sources.find(x=>x.id==='joongna');
+const browser=await chromium.launch({headless:true}),context=await browser.newContext({locale:'ko-KR',timezoneId:'Asia/Seoul',viewport:{width:1440,height:1000}}),page=await context.newPage();
+const observed=[],failures=[],discoveries=[],queryResults=[];
+try{
+ for(const category of ['machine','racket']){
+  const query=source.searchLinks.find(x=>x.category===category);let urls=[];
+  if(query){try{await page.goto(query.url,{waitUntil:'domcontentloaded',timeout:35000});await page.getByRole('button',{name:'최신순',exact:true}).click({timeout:12000});const exclude=page.getByRole('checkbox',{name:/판매완료 상품 제외/}).first();if(await exclude.count())await exclude.check();if(!page.url().includes('sort=RECENT_SORT'))throw Error('Latest sort not accepted');await page.locator('main a[href*="/product/"]').first().waitFor({timeout:12000});const cards=await page.locator('main a[href*="/product/"]').evaluateAll(nodes=>nodes.map(a=>({url:a.href,text:a.innerText})).filter(x=>/원/.test(x.text)));urls=[...new Set(cards.filter(x=>relevantMarketTitle(x.text,category)).map(x=>x.url))].slice(0,4);if(!urls.length)throw Error('No validated product cards; retain previous data');queryResults.push({category,status:'ok',latestSortAccepted:true,candidates:urls.length});discoveries.push(...urls);}catch(e){failures.push({category,phase:'search',message:redact(e.message).split('\n')[0].slice(0,160)});queryResults.push({category,status:'failed',latestSortAccepted:false})}}
+  if(!urls.length)urls=old.items.filter(x=>x.category===category&&x.source==='중고나라').map(x=>x.url).slice(0,4);
+  for(const url of urls){try{await page.goto(url,{waitUntil:'domcontentloaded',timeout:35000});const heading=page.getByRole('heading',{level:1});await heading.waitFor({timeout:12000});const evidence=await heading.evaluate(el=>({title:el.textContent,priceBlock:el.parentElement.parentElement.textContent,header:el.parentElement.parentElement.parentElement.innerText}));const mainText=await page.locator('main').innerText();const shippingText=mainText.match(/거래\s*방법([\s\S]*?)(?:결제혜택|새\s*상품|상품\s*정보)/)?.[1]||'';const description=await page.getByRole('article').first().textContent().catch(()=>'');const item=parseProductEvidence({...evidence,shippingText,description,url,category,checkedAt:now});if(!item)throw Error('Product title/price/type not validated');observed.push(item);}catch(e){failures.push({category,phase:'detail',url,message:redact(e.message).split('\n')[0].slice(0,160)})}}
+ }
+}finally{await context.close();await browser.close()}
+const full=queryResults.length===2&&queryResults.every(q=>q.status==='ok')&&failures.length===0&&observed.length>0,status=full?'ok':observed.length?'partial':'failed';const updated={...old,attemptedAt:now,lastSuccessfulRefreshAt:observed.length?now:old.lastSuccessfulRefreshAt,refreshMode:'GitHub 주간 익명 공개 검색·재확인. 확인한 일부 공개 매물이며 전체 시장 실시간 자료가 아닙니다.',items:retainMarketRecords(old.items,observed),sources:old.sources.map(s=>s.id==='joongna'?{...s,status,lastAttemptAt:now,lastSuccessAt:full?now:s.lastSuccessAt,message:'신규검색 '+queryResults.filter(x=>x.status==='ok').length+'/2, 상세확인 '+observed.length+'건, 실패 '+failures.length+'건. 미확인 항목과 이전 자료를 보존합니다.'}:s)};
+await fs.writeFile(file,JSON.stringify(updated,null,2)+'\n','utf8');await fs.mkdir(path.join(root,'reports'),{recursive:true});const report={checkedAt:now,environment:process.env.GITHUB_ACTIONS?'github-actions':'explicit-local-test',status,queryResults,detailVerified:observed.length,retained:updated.items.length,failures};await fs.writeFile(path.join(root,'reports/market-check.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
