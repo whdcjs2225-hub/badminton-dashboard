@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "seedCheckedAt": "2026-11-23",
-  "lastAttemptAt": "2026-11-24T05:07:19.083Z",
-  "lastSuccessfulRefreshAt": "2026-11-24T05:07:19.083Z",
+  "lastAttemptAt": "2026-11-24T05:14:09.281Z",
+  "lastSuccessfulRefreshAt": "2026-11-24T05:14:09.281Z",
   "lastRun": {
-    "at": "2026-11-24T05:07:19.083Z",
+    "at": "2026-11-24T05:14:09.281Z",
     "event": "workflow_dispatch",
-    "id": "45330998744",
+    "id": "45331591973",
     "attempt": "1",
-    "url": "https://github.com/whdcjs2225-hub/badminton-dashboard/actions/runs/45330998744",
+    "url": "https://github.com/whdcjs2225-hub/badminton-dashboard/actions/runs/45331591973",
     "probe": false
   },
   "tournaments": [
@@ -161,8 +161,8 @@
       "platformAliases": [
         "game-4279"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
-      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-11-23",
@@ -218,7 +218,7 @@
       "platformAliases": [
         "bk-4055"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-11-23",
@@ -395,8 +395,8 @@
       "platformAliases": [
         "game-4189"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
-      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-11-16",
@@ -493,8 +493,8 @@
       "platformAliases": [
         "game-4419"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
-      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-11-16",
@@ -550,7 +550,7 @@
       "platformAliases": [
         "bk-4018"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-11-16",
@@ -618,7 +618,7 @@
         "bk-4040",
         "ohmy-26947ea15b694b"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-09-21",
@@ -679,8 +679,8 @@
         "chungju",
         "game-4348"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
-      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-10-10",
@@ -739,7 +739,7 @@
       "platformAliases": [
         "bk-3989"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-11-16",
@@ -800,8 +800,8 @@
       "platformAliases": [
         "game-4434"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
-      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:14:09.281Z"
     },
     {
       "firstSeen": "2026-11-16",
@@ -860,8 +860,8 @@
       "platformAliases": [
         "game-4421"
       ],
-      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
-      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
+      "lastListSeenAt": "2026-11-24T05:14:09.281Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:14:09.281Z"
     }
   ],
   "sources": [
@@ -872,7 +872,7 @@
       "kind": "app",
       "coverage": "공식 공개 웹에서 전체 대회 목록 미확인",
       "status": "blocked",
-      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
+      "lastAttemptAt": "2026-11-24T05:14:09.281Z",
       "lastSuccessAt": null,
       "baselineDate": "2026-11-23",
       "message": "공식 랜딩은 조회되지만 공개 대회 목록이 없어 자동 수집 불가. 앱·로그인·2차 출처를 성공으로 대체하지 않음.",
@@ -888,8 +888,8 @@
       "kind": "facecock",
       "coverage": "공개 대회 목록 페이지",
       "status": "ok",
-      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
-      "lastSuccessAt": "2026-11-24T05:07:19.083Z",
+      "lastAttemptAt": "2026-11-24T05:14:09.281Z",
+      "lastSuccessAt": "2026-11-24T05:14:09.281Z",
       "baselineDate": "2026-11-23",
       "message": "공개 목록 확인. 유효 행 21건, 예정 21건, 범위 내 6건. 새 항목의 급수·요강 미검증은 그대로 표시.",
       "httpStatus": 200,
@@ -909,8 +909,8 @@
       "kind": "bkplay",
       "coverage": "현재 연도 공개 전체 목록",
       "status": "ok",
-      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
-      "lastSuccessAt": "2026-11-24T05:07:19.083Z",
+      "lastAttemptAt": "2026-11-24T05:14:09.281Z",
+      "lastSuccessAt": "2026-11-24T05:14:09.281Z",
       "baselineDate": "2026-11-23",
       "message": "공개 목록 확인. 유효 행 212건, 예정 15건, 범위 내 4건. 새 항목의 급수·요강 미검증은 그대로 표시.",
       "httpStatus": 200,
@@ -930,7 +930,7 @@
       "kind": "sponet",
       "coverage": "전체 목록 미확인 · 개별 대회 접근과 구분",
       "status": "blocked",
-      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
+      "lastAttemptAt": "2026-11-24T05:14:09.281Z",
       "lastSuccessAt": null,
       "baselineDate": "2026-11-23",
       "message": "전체 대회 목록 미확인. 루트/BM과 일부 개별 대회 접근은 구분하며 전체 조회 성공으로 간주하지 않음.",
@@ -946,7 +946,7 @@
       "kind": "badmintongame",
       "coverage": "전국·충주·충북·충남 필터와 페이지 순회",
       "status": "failed",
-      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
+      "lastAttemptAt": "2026-11-24T05:14:09.281Z",
       "lastSuccessAt": null,
       "baselineDate": "2026-11-23",
       "message": "HTTP/HTTPS 모두 조회 실패: apiRequestContext.get: Timeout 25000ms exceeded. / apiRequestContext.get: Timeout 25000ms exceeded.",
@@ -961,8 +961,8 @@
       "kind": "ohmy",
       "coverage": "예정 대회 목록",
       "status": "ok",
-      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
-      "lastSuccessAt": "2026-11-24T05:07:19.083Z",
+      "lastAttemptAt": "2026-11-24T05:14:09.281Z",
+      "lastSuccessAt": "2026-11-24T05:14:09.281Z",
       "baselineDate": "2026-11-23",
       "message": "공개 목록 확인. 유효 행 2건, 예정 2건, 범위 내 1건. 새 항목의 급수·요강 미검증은 그대로 표시.",
       "httpStatus": 200,
@@ -978,6 +978,20 @@
   ],
   "latestChanges": [],
   "history": [
+    {
+      "at": "2026-11-24T05:14:09.281Z",
+      "ok": [
+        "facecock",
+        "bkplay",
+        "ohmy"
+      ],
+      "failed": [
+        "wekkuk",
+        "sponet",
+        "badmintongame"
+      ],
+      "new": 0
+    },
     {
       "at": "2026-11-24T05:07:19.083Z",
       "ok": [
