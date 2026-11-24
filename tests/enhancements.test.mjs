@@ -24,3 +24,12 @@ test('개최일이 바뀌면 이전 연도 급수 요약을 그대로 확정하�
 
 test('중고 상세 DOM 깊이가 달라도 제목 근처 실제 가격을 읽음',()=>{const price={tagName:'SECTION',textContent:'배드민턴 라켓80,000원',innerText:'배드민턴 라켓\n80,000원',parentElement:{tagName:'MAIN',innerText:'배드민턴 라켓\n80,000원\n5분 전'}};const heading={textContent:'배드민턴 라켓',parentElement:{tagName:'DIV',textContent:'배드민턴 라켓',innerText:'배드민턴 라켓',parentElement:price}};assert.match(readProductDom(heading).priceBlock,/80,000/)});
 test('접근 오류처럼 단순한 DOM도 부모 null 예외 없이 거부',()=>{const heading={textContent:'접근 제한',parentElement:{tagName:'BODY',textContent:'접근 제한',parentElement:null}};assert.equal(readProductDom(heading).priceBlock,'')});
+
+const cardFixture={...rules.rules[0],system:{label:'혼합 기준',description:'자체·외부 구분',self:{status:'yes',detail:'본 대회 입상'},external:{status:'partial',detail:'E급 전국 D입상'},association:{status:'not-stated',detail:'미명시'}},gradeCards:[{key:'D',label:'D급',basis:'자체대회',criteria:['본 대회 E급 입상 반영'],limits:['지역 A급 불가'],period:'2025년까지',privateOwner:'HIDDEN'},{key:'E',label:'E급',criteria:['전국 D급 입상 없음'],period:'기간 미명시'}],commonRules:['상위 파트너 기준'],reviewedAt:'2026-11-24',reviewSource:'https://example.com/rules.pdf'};
+test('급수별 카드와 자체·외부·협회 기준을 분리 전달',()=>{const s=buildGradePageData([original],{rules:[cardFixture]},'now').events[0].summary;assert.equal(s.gradeCards[0].key,'D');assert.equal(s.system.self.status,'yes');assert.equal(s.system.external.status,'partial')});
+test('급수 카드에 비공개 임의 필드를 노출하지 않음',()=>{const s=buildGradePageData([original],{rules:[cardFixture]},'now').events[0].summary;assert.equal(s.gradeCards[0].privateOwner,undefined)});
+test('미명시는 자체 기록 반영 안 함으로 바꾸지 않음',()=>{const s=buildGradePageData([original],{rules:[cardFixture]},'now').events[0].summary;assert.equal(s.system.association.status,'not-stated')});
+test('요강 변경 시 오래된 급수 카드와 판정 분류를 숨김',()=>{const s=buildGradePageData([{...original,grade:'새 요강'}],{rules:[cardFixture]},'now').events[0].summary;assert.deepEqual(s.gradeCards,[]);assert.equal(s.system,null)});
+test('미분석 대회에 D급 C급 자격을 임의 생성하지 않음',()=>{const s=buildGradePageData([{...original,id:'new'}],{rules:[cardFixture]},'now').events[0].summary;assert.deepEqual(s.gradeCards,[])});
+test('자체 D급 판정 기간을 외부 E급 제한에 확장하지 않음',()=>{const s=buildGradePageData([original],{rules:[cardFixture]},'now').events[0].summary;assert.equal(s.gradeCards[1].period,'기간 미명시')});
+test('위험한 요강 링크는 새 구조에도 전달하지 않음',()=>{const s=buildGradePageData([original],{rules:[{...cardFixture,reviewSource:'javascript:alert(1)'}]},'now').events[0].summary;assert.equal(s.reviewSource,null)});

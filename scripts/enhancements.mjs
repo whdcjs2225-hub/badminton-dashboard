@@ -2,8 +2,13 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {scriptJSON,sanitizeRecord,safeUrl,redact} from './lib.mjs';
 
+function gradeDisplay(r,stale){
+ const text=v=>redact(String(v??'')),list=v=>Array.isArray(v)?v.map(text):[];
+ const system=r.system?{label:text(r.system.label),description:text(r.system.description),...Object.fromEntries(['self','external','association'].map(k=>[k,{status:['yes','partial','registration','not-stated','unknown'].includes(r.system[k]?.status)?r.system[k].status:'unknown',detail:text(r.system[k]?.detail)}]))}:null;
+ return {system:stale?null:system,gradeCards:stale?[]:(r.gradeCards||[]).map(c=>({key:text(c.key),label:text(c.label),basis:text(c.basis),criteria:list(c.criteria),limits:list(c.limits),period:text(c.period),notes:list(c.notes),evidence:text(c.evidence)})),commonRules:list(r.commonRules),reviewedAt:r.reviewedAt||null,reviewSource:safeUrl(r.reviewSource)||null,verifiedExtract:text(r.verifiedExtract)};
+}
 export function buildGradePageData(events,structured,checkedAt){
-  return {checkedAt,events:events.map(original=>{const t=sanitizeRecord(original),r=structured.rules.find(x=>x.id===t.id);const stale=!!r&&!!(r.sourceGrade!==t.grade||r.sourceConditions!==t.conditions||(r.sourceEventDate&&r.sourceEventDate!==t.date)||(r.sourceEventTitle&&r.sourceEventTitle!==t.title));return {...t,summary:r?{family:r.family,reference:r.reference,period:r.period,promotion:r.promotion,highest:r.highest,restrictions:r.restrictions,ageAndDiscipline:r.ageAndDiscipline,missing:r.missing,evidenceLevel:r.evidenceLevel,summaryStale:stale}:{family:'새 대회 · 요강 미분석',reference:'미확인',period:'미확인',promotion:'미확인',highest:'미확인',restrictions:['원문 요강 확인 필요'],ageAndDiscipline:'미확인',missing:['자동 목록 수집만 완료. 급수 규칙은 임의 생성하지 않습니다.'],evidenceLevel:'목록만 확인 · 판정 보류',newUnanalyzed:true,summaryStale:true}}})};
+  return {checkedAt,events:events.map(original=>{const t=sanitizeRecord(original),r=structured.rules.find(x=>x.id===t.id);const stale=!!r&&!!(r.sourceGrade!==t.grade||r.sourceConditions!==t.conditions||(r.sourceEventDate&&r.sourceEventDate!==t.date)||(r.sourceEventTitle&&r.sourceEventTitle!==t.title));return {...t,summary:r?{family:r.family,reference:r.reference,period:r.period,promotion:r.promotion,highest:r.highest,restrictions:r.restrictions,ageAndDiscipline:r.ageAndDiscipline,missing:r.missing,evidenceLevel:r.evidenceLevel,summaryStale:stale,...gradeDisplay(r,stale)}:{family:'새 대회 · 요강 미분석',reference:'미확인',period:'미확인',promotion:'미확인',highest:'미확인',restrictions:['원문 요강 확인 필요'],ageAndDiscipline:'미확인',missing:['자동 목록 수집만 완료. 급수 규칙은 임의 생성하지 않습니다.'],evidenceLevel:'목록만 확인 · 판정 보류',newUnanalyzed:true,summaryStale:true,system:null,gradeCards:[],commonRules:[]}}})};
 }
 export function publicMarketData(data){
   const categories=new Set(['machine','racket']),text=v=>redact(String(v??''));
