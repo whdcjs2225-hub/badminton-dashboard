@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "seedCheckedAt": "2026-11-23",
-  "lastAttemptAt": "2026-11-24T03:52:39.177Z",
-  "lastSuccessfulRefreshAt": "2026-11-24T03:52:39.177Z",
+  "lastAttemptAt": "2026-11-24T05:07:19.083Z",
+  "lastSuccessfulRefreshAt": "2026-11-24T05:07:19.083Z",
   "lastRun": {
-    "at": "2026-11-24T03:52:39.177Z",
+    "at": "2026-11-24T05:07:19.083Z",
     "event": "workflow_dispatch",
-    "id": "45322441681",
+    "id": "45330998744",
     "attempt": "1",
-    "url": "https://github.com/whdcjs2225-hub/badminton-dashboard/actions/runs/45322441681",
+    "url": "https://github.com/whdcjs2225-hub/badminton-dashboard/actions/runs/45330998744",
     "probe": false
   },
   "tournaments": [
@@ -104,7 +104,7 @@
     {
       "firstSeen": "2026-10-10",
       "lastChecked": "2026-11-24",
-      "detailLastChecked": "2026-11-16",
+      "detailLastChecked": "2026-11-24",
       "publishedAt": null,
       "modifiedAt": null,
       "changes": [
@@ -141,20 +141,28 @@
         {
           "site": "페이스콕",
           "url": "https://facecock.co.kr/page/index.php?pid=game_view&ga_id=4279"
+        },
+        {
+          "site": "첨부 요강",
+          "url": "https://facecock.co.kr/app/game_pdf.html?wr_id=4279"
+        },
+        {
+          "site": "첨부 요강",
+          "url": "https://drive.google.com/viewerng/viewer?embeded=true&url=https://facecock.co.kr/app/game_pdf.html?wr_id=4279"
         }
       ],
       "url": "http://www.badmintongame.co.kr/game/game_view.html?ga_id=4279",
       "gradeLabel": "요강 확인 필요",
-      "grade": "요강 미게시(첨부 PDF 비어 있음), 판정 기준 미확인.",
-      "conditions": "참가지역 전국, 기타 자격 미확인.",
-      "unknowns": "요강 게시 대기",
+      "grade": "2026-11-24 요강 확인. 횡성오픈 자체 출전·입상 기록과 시군구 지역대회·오픈대회 경력을 함께 적용. A: 자체 A 출전 또는 제5회 B 1위, B: 자체 B 출전 또는 제5회 C 1·2위, C: 자체 C 출전 또는 제5회 D 1·2·3위. D1/D2: 자체 D 출전 또는 제5회 D3/D4 1·2·3위, 외부 A급 출전·2026년 이전 A급 승급예정자 불가. D3/D4: 강원+강원만, 외부 C급 이상 출전·2026년 이전 C급 승급예정자 불가. 2026년 D조 입상 가능, 비승급 대회 증빙 필요. E(횡성초심)·G(강원초심) 토요일 남여복 운영. 상세 조건은 원문 참고. E급: 횡성협회 회원·인정 군민, 제19회 횡성한우배·제5회 횡성오픈 E급 출전·입상 없어야 함. G급: 횡성 제외 강원17개시군, 2026.1.1 이후 등록·E급출전 또는 첫대회 조건, C급이상 경력 불가 및 일부 D3/D4 예외.",
+      "conditions": "시·도 또는 시군구협회 등록 회원만 참가. 소속 시도·클럽명 기재. 남·여·혼복 동일 급수. 입상 승급자는 승급 급수 이상, 출전 경력자는 동일 급수 이상 신청. 지역대회 범위와 도지사기·도생체·여성생체·생활대축전 제외 조항 확인 필요.",
+      "unknowns": "G급의 D3/D4 출전 예외 및 D1/D2 단일종목 단서는 요강 원문 확인 필요. 외부 경력의 전체 시작일 미명시.",
       "startDate": "2026-12-12",
       "endDate": "2026-12-13",
       "platformAliases": [
         "game-4279"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z",
-      "lastBasicDetailCheckAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-11-23",
@@ -210,7 +218,7 @@
       "platformAliases": [
         "bk-4055"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-11-23",
@@ -329,7 +337,7 @@
     {
       "firstSeen": "2026-10-10",
       "lastChecked": "2026-11-24",
-      "detailLastChecked": "2026-11-16",
+      "detailLastChecked": "2026-11-24",
       "publishedAt": null,
       "modifiedAt": null,
       "changes": [
@@ -379,16 +387,16 @@
       ],
       "url": "http://www.badmintongame.co.kr/game/game_view.html?ga_id=4189",
       "gradeLabel": "혼합 기준",
-      "grade": "본 대회 이력 기준: A=2013~2025 단양팔경 A급 출전 또는 B급 결승 진출, B=B급 출전·C급 결승, C=C급 출전·D1/D2 결승, D=D급 출전·팔경대회 입상 경력 없는 자(전국). 각 시·도 지역 A급 또는 A급 출전이력 동호인은 D1/D2 불가. A 제외 전 급수 결승 진출자는 차기년도 상위급(3~4팀은 우승만). 남·여·혼복 입상 승급 이상 출전.",
-      "conditions": "전국 동호인. 20~55대, 준자강(자강+동호인), E1/E2는 단양군협회 가입·경력 2년 미만만. C·D급은 지역 구분 없이 1·2 중복 가능. 연령 하향(혼복 파트너 나이)·급수 상향. 신분증 확인, 대리 출전 몰수. 이의: 본인 종목만, 11/19 하루, 당일 불가.",
+      "grade": "본 대회 이력 기준: A=2013~2025 단양팔경 A급 출전 또는 B급 결승 진출, B=B급 출전·C급 결승, C=C급 출전·D1/D2 결승, D=D급 출전·팔경대회 입상 경력 없는 자(전국). 각 시·도 지역 A급 또는 A급 출전이력 동호인은 D1/D2 불가. A 제외 전 급수 결승 진출자는 차기년도 상위급(3~4팀은 우승만). 남·여·혼복 입상 승급 이상 출전. 원문 D급 표기: 2013년~2025년 단양팔경대회 D급 출전 경력자 및 팔경대회 입상 경력이 없는 자(전국).",
+      "conditions": "전국 동호인. 20~55대, 준자강(자강+동호인), E1/E2는 단양군 관내 클럽 등록자 중 대회 출전 경력이 없거나 회원 가입 2년 미만인 경우. C·D급은 지역 구분 없이 1·2 중복 가능. 연령 하향(혼복 파트너 나이)·급수 상향. 신분증 확인, 대리 출전 몰수. 이의: 본인 종목만, 11/19 하루, 당일 불가.",
       "unknowns": "레슨자 제한 미명시",
       "startDate": "2026-11-28",
       "endDate": "2026-11-29",
       "platformAliases": [
         "game-4189"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z",
-      "lastBasicDetailCheckAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-11-16",
@@ -431,7 +439,7 @@
     {
       "firstSeen": "2026-11-16",
       "lastChecked": "2026-11-24",
-      "detailLastChecked": "2026-11-16",
+      "detailLastChecked": "2026-11-24",
       "publishedAt": null,
       "modifiedAt": null,
       "changes": [],
@@ -485,8 +493,8 @@
       "platformAliases": [
         "game-4419"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z",
-      "lastBasicDetailCheckAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-11-16",
@@ -542,7 +550,7 @@
       "platformAliases": [
         "bk-4018"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-11-16",
@@ -564,7 +572,7 @@
       ],
       "urgent": true,
       "id": "bk-4040",
-      "section": "new",
+      "section": "existing",
       "scope": "national",
       "scopeLabel": "전국",
       "title": "제12회 상주곶감배 오픈 배드민턴대회",
@@ -610,12 +618,12 @@
         "bk-4040",
         "ohmy-26947ea15b694b"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-09-21",
       "lastChecked": "2026-11-24",
-      "detailLastChecked": "2026-11-16",
+      "detailLastChecked": "2026-11-24",
       "publishedAt": null,
       "modifiedAt": null,
       "changes": [
@@ -662,7 +670,7 @@
       ],
       "url": "http://www.badmintongame.co.kr/game/game_view.html?ga_id=4348",
       "gradeLabel": "혼합 기준",
-      "grade": "본 대회 입상 기준(A=B급 입상, B=C급 입상, C=D급 입상, D=E급 입상, 5팀 이상, 2025년 입상까지 인정·2026년 해당 없음). D급은 각 시군구 지역급수 A급이 아닌 동호인, E급(전국초심)은 전국대회 D급 입상이력 없는 동호인(5팀 이상 적용), F급(충청초심)은 충남북(대전·세종 불가) 시군구협회 급수 C·D급. 이전 대회 승급자는 승급 급수로 출전. 이의: 11/30~12/1 17시, 충주시협회 다음카페만, 본인 참가 종목만.",
+      "grade": "본 대회 입상 기준(A=B급 입상, B=C급 입상, C=D급 입상, D=E급 입상, 5팀 이상, 2025년 입상까지 인정·2026년 해당 없음). D급은 각 시군구 지역급수 A급이 아닌 동호인, E급(전국초심)은 전국대회 D급 입상이력 없는 동호인(5팀 이상 적용), F급(충청초심)은 충남북(대전·세종 불가) 시군구협회 급수 C·D급. 이전 대회 승급자는 승급 급수로 출전. 이의: 11/30~12/1 17시, 충주시협회 다음카페만, 본인 참가 종목만. 원문 추가 확인: E급은 시·군·구 지역 급수가 A급이 아니어야 하며 전국대회 D급 입상이력이 없어야 함(5팀 이상일 경우 적용).",
       "conditions": "전국 동호인. 고등학교 이상 선수 생활자는 준자강조만. F급은 충남북 시군구협회 등록 회원 및 충청도 주소 등록자만. 연령 하향·급수 상향 가능, 상위 파트너 급수 기준(혼복 포함). E·F급은 상위급 중복 가능, C1/2·D1/2·E1/2 토·일 중복 가능. 6팀 미만 통합·취소. 신분증 연령 확인, 대리·부정선수 몰수. 신청 시 연락처·슬리퍼 사이즈 필수.",
       "unknowns": "레슨자 제한 미명시",
       "startDate": "2026-12-05",
@@ -671,8 +679,8 @@
         "chungju",
         "game-4348"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z",
-      "lastBasicDetailCheckAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-10-10",
@@ -731,12 +739,12 @@
       "platformAliases": [
         "bk-3989"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-11-16",
       "lastChecked": "2026-11-24",
-      "detailLastChecked": "2026-11-16",
+      "detailLastChecked": "2026-11-24",
       "publishedAt": null,
       "modifiedAt": null,
       "changes": [
@@ -792,13 +800,13 @@
       "platformAliases": [
         "game-4434"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z",
-      "lastBasicDetailCheckAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
     },
     {
       "firstSeen": "2026-11-16",
       "lastChecked": "2026-11-24",
-      "detailLastChecked": "2026-11-16",
+      "detailLastChecked": "2026-11-24",
       "publishedAt": null,
       "modifiedAt": null,
       "changes": [
@@ -852,8 +860,8 @@
       "platformAliases": [
         "game-4421"
       ],
-      "lastListSeenAt": "2026-11-24T03:52:39.177Z",
-      "lastBasicDetailCheckAt": "2026-11-24T03:52:39.177Z"
+      "lastListSeenAt": "2026-11-24T05:07:19.083Z",
+      "lastBasicDetailCheckAt": "2026-11-24T05:07:19.083Z"
     }
   ],
   "sources": [
@@ -864,7 +872,7 @@
       "kind": "app",
       "coverage": "공식 공개 웹에서 전체 대회 목록 미확인",
       "status": "blocked",
-      "lastAttemptAt": "2026-11-24T03:52:39.177Z",
+      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
       "lastSuccessAt": null,
       "baselineDate": "2026-11-23",
       "message": "공식 랜딩은 조회되지만 공개 대회 목록이 없어 자동 수집 불가. 앱·로그인·2차 출처를 성공으로 대체하지 않음.",
@@ -880,8 +888,8 @@
       "kind": "facecock",
       "coverage": "공개 대회 목록 페이지",
       "status": "ok",
-      "lastAttemptAt": "2026-11-24T03:52:39.177Z",
-      "lastSuccessAt": "2026-11-24T03:52:39.177Z",
+      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
+      "lastSuccessAt": "2026-11-24T05:07:19.083Z",
       "baselineDate": "2026-11-23",
       "message": "공개 목록 확인. 유효 행 21건, 예정 21건, 범위 내 6건. 새 항목의 급수·요강 미검증은 그대로 표시.",
       "httpStatus": 200,
@@ -901,8 +909,8 @@
       "kind": "bkplay",
       "coverage": "현재 연도 공개 전체 목록",
       "status": "ok",
-      "lastAttemptAt": "2026-11-24T03:52:39.177Z",
-      "lastSuccessAt": "2026-11-24T03:52:39.177Z",
+      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
+      "lastSuccessAt": "2026-11-24T05:07:19.083Z",
       "baselineDate": "2026-11-23",
       "message": "공개 목록 확인. 유효 행 212건, 예정 15건, 범위 내 4건. 새 항목의 급수·요강 미검증은 그대로 표시.",
       "httpStatus": 200,
@@ -922,7 +930,7 @@
       "kind": "sponet",
       "coverage": "전체 목록 미확인 · 개별 대회 접근과 구분",
       "status": "blocked",
-      "lastAttemptAt": "2026-11-24T03:52:39.177Z",
+      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
       "lastSuccessAt": null,
       "baselineDate": "2026-11-23",
       "message": "전체 대회 목록 미확인. 루트/BM과 일부 개별 대회 접근은 구분하며 전체 조회 성공으로 간주하지 않음.",
@@ -938,7 +946,7 @@
       "kind": "badmintongame",
       "coverage": "전국·충주·충북·충남 필터와 페이지 순회",
       "status": "failed",
-      "lastAttemptAt": "2026-11-24T03:52:39.177Z",
+      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
       "lastSuccessAt": null,
       "baselineDate": "2026-11-23",
       "message": "HTTP/HTTPS 모두 조회 실패: apiRequestContext.get: Timeout 25000ms exceeded. / apiRequestContext.get: Timeout 25000ms exceeded.",
@@ -953,8 +961,8 @@
       "kind": "ohmy",
       "coverage": "예정 대회 목록",
       "status": "ok",
-      "lastAttemptAt": "2026-11-24T03:52:39.177Z",
-      "lastSuccessAt": "2026-11-24T03:52:39.177Z",
+      "lastAttemptAt": "2026-11-24T05:07:19.083Z",
+      "lastSuccessAt": "2026-11-24T05:07:19.083Z",
       "baselineDate": "2026-11-23",
       "message": "공개 목록 확인. 유효 행 2건, 예정 2건, 범위 내 1건. 새 항목의 급수·요강 미검증은 그대로 표시.",
       "httpStatus": 200,
@@ -968,14 +976,22 @@
       "notes": []
     }
   ],
-  "latestChanges": [
-    {
-      "id": "bk-4040",
-      "type": "changed",
-      "title": "제12회 상주곶감배 OPEN 배드민턴대회"
-    }
-  ],
+  "latestChanges": [],
   "history": [
+    {
+      "at": "2026-11-24T05:07:19.083Z",
+      "ok": [
+        "facecock",
+        "bkplay",
+        "ohmy"
+      ],
+      "failed": [
+        "wekkuk",
+        "sponet",
+        "badmintongame"
+      ],
+      "new": 0
+    },
     {
       "at": "2026-11-24T03:52:39.177Z",
       "ok": [
